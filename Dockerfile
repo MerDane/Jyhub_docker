@@ -13,7 +13,7 @@ RUN npm install -g configurable-http-proxy
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     wget --quiet https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh -O ~/anaconda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
-    /opt/conda/bin/conda install --yes python=3.6 pip seaborn notebook&& \
+    /opt/conda/bin/conda install --yes python=3.6 pip seaborn notebook tensorflow-gpu&& \
     /opt/conda/bin/conda install --yes -c anaconda keras-gpu && \
     /opt/conda/bin/conda install --yes -c conda-forge \
      sqlalchemy tornado jinja2 traitlets requests pip pycurl \
@@ -32,15 +32,15 @@ RUN apt-get install -y curl grep sed dpkg && \
 ENV PATH /opt/conda/bin:$PATH
 
 #jupyter hub setting
-ADD . /src/jupyterhub
+#ADD . /src/jupyterhub
 WORKDIR /src/jupyterhub
 
 #Use local Unix user as jupyterhub user
 RUN groupadd -g 1000 developer && \
-    useradd  -g developer -G sudo -m -s /bin/bash tadano1 && \
+    useradd  -g developer -G sudo -m -s /bin/bash user1 && \
     echo 'user1:user1234' | chpasswd
 
-RUN useradd  -g developer -G sudo -m -s /bin/bash tadano2 && \
+RUN useradd  -g developer -G sudo -m -s /bin/bash user2 && \
     echo 'user2:user1234' | chpasswd
 
 RUN mkdir -p /srv/jupyterhub/

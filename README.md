@@ -36,3 +36,14 @@ nvidia-docker -p 8000:8000 --rm jupyterhub:KerasGPU jupyterhub
 
 * Create conda env. based jupyter kernels
 * others
+
+#Other
+
+```docker
+LABEL org.jupyter.service="jupyterhub" \
+      multi.label1="XXXX Ltd." \
+      multi.label2="TRU" \
+      other="GPU"
+```
+
+Just some informations for built images
