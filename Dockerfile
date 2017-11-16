@@ -11,7 +11,7 @@ RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificate
 # install Anaconda
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     wget --quiet https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh -O ~/anaconda.sh && \
-    /bin/bash ~/anaconda.sh -b -p /opt/conda3 && \
+    /bin/bash ~/anaconda.sh -b -p /opt/conda && \
     /opt/conda/bin/conda install --yes -c anaconda keras-gpu \
      python=3.6 keras-gpu pip seaborn pydot-ng && \
     /opt/conda/bin/conda install --yes -c conda-forge \
