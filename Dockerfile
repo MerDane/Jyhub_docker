@@ -12,8 +12,8 @@ RUN apt-get update --fix-missing && apt-get install -y wget bzip2 ca-certificate
 RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     wget --quiet https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh -O ~/anaconda.sh && \
     /bin/bash ~/anaconda.sh -b -p /opt/conda && \
-    /opt/conda/bin/conda install --yes -c anaconda keras-gpu \
-     python=3.6 keras-gpu pip seaborn pydot-ng && \
+    /opt/conda/bin/conda install --yes python=3.6 pip seaborn && \
+    /opt/conda/bin/conda install --yes -c anaconda keras-gpu && \
     /opt/conda/bin/conda install --yes -c conda-forge \
      sqlalchemy tornado jinja2 traitlets requests pip pycurl \
       nodejs configurable-http-proxy && \
@@ -27,6 +27,8 @@ RUN apt-get install -y curl grep sed dpkg && \
     dpkg -i tini.deb && \
     rm tini.deb && \
     apt-get clean
+
+RUN pip install pydot-ng
 
 ENV PATH /opt/conda/bin:$PATH
 
