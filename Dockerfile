@@ -28,30 +28,27 @@ RUN apt-get install -y curl grep sed dpkg && \
     rm tini.deb && \
     apt-get clean
 
-RUN pip install pydot-ng
-
 ENV PATH /opt/conda/bin:$PATH
 
 #jupyter hub setting
 ADD . /src/jupyterhub
 WORKDIR /src/jupyterhub
+#COPY package.json requirements.txt bower-lite setup.py /src/jupyterhub/
 
 RUN npm install --unsafe-perm && \
     pip install . && \
     rm -rf $PWD ~/.cache ~/.npm
 
-RUN mkdir -p /srv/jupyterhub/
+# RUN npm install -g configurable-http-proxy && \
+#     pip install pydot-ng && \
+#     pip install jupyterhub && \
+#     mkdir -p /srv/jupyterhub/
+
 WORKDIR /srv/jupyterhub/
 EXPOSE 8000
 
-# background script
-ADD run.sh /root/run.sh
-RUN chmod +x /root/run.sh
-
-# expose port 8080
-EXPOSE 8080
-
-
-LABEL org.jupyter.service="jupyterhub"
+LABEL multi.label1="TADANO Ltd." \
+      multi.label2="TRU" \
+      other="GPU"
 
 CMD ["jupyterhub"]
