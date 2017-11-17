@@ -6,6 +6,7 @@
 # **jupyterhub:KerasGPU**
 
 # Info
+
 This repo is aimed to create docker images for using jupyterhub on the base of Keras-gpu.
 
 ## Includes
@@ -15,35 +16,49 @@ This repo is aimed to create docker images for using jupyterhub on the base of K
   * Keras 2.0.8
   * tensorflow-gpu 1.3.0
   * pandas
-  * others
 * JupyterHub
+* nvidia/cuda:9.0-cudnn7
 
 # Usage
 
-* Docker(tested)
+* Docker (not Supported)
 
 ```docker
-docker run -p 8000:8000 --rm jupyterhub:KerasGPU jupyterhub
+#docker run -p 8000:8000 --rm jupyterhub:TebsorflowGPU jupyterhub
 ```
 
-* nvidia-docker(tested on version 2)
+* nvidia-docker (tested)
 
 ```docker
-nvidia-docker -p 8000:8000 --rm jupyterhub:KerasGPU jupyterhub
+nvidia-docker -p 8000:8000 --rm jupyterhub:TebsorflowGPU jupyterhub
 ```
 
-#TODO
+* GPU confirmation
+
+  ```py
+  import tensorflow as tf
+
+  config = tf.ConfigProto()
+  config.gpu_options.allow_growth = True
+  sess = tf.Session(config=config)
+
+  ```
+
+# TODO
 
 * Create conda env. based jupyter kernels
 * others
 
-#Other
+# Other
 
 ```docker
+
 LABEL org.jupyter.service="jupyterhub" \
       multi.label1="XXXX Ltd." \
       multi.label2="TRU" \
       other="GPU"
+
 ```
+
 
 Just some informations for built images
