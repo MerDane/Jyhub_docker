@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-cudnn7-runtime-ubuntu16.04
+FROM nvidia/cuda:9.2-cudnn7-runtime-ubuntu16.04
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
@@ -16,7 +16,7 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     /opt/conda/bin/conda install --yes -c conda-forge \
     sqlalchemy tornado jinja2 traitlets requests pycurl \
     nodejs configurable-http-proxy jupyterhub && \
-    /opt/conda/bin/conda install -c anaconda tensorflow-gpu && \
+    /opt/conda/bin/conda install tensorflow-gpu && \
     rm ~/anaconda.sh
 
 # install Tini
